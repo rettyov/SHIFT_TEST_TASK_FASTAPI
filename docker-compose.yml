@@ -1,0 +1,22 @@
+version: '3'
+services:
+  database:
+    image: 'postgres'
+    container_name: db
+    env_file:
+      - database.env
+    ports:
+      - '5432:5432'
+
+  web:
+    build: .
+    container_name: employee
+    links:
+      - database:db
+    volumes:
+      - ./app:/app
+    ports:
+      - '80:80'
+
+
+
